@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take 5 Close-Out App — Testing Status</title>
+<style>
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    background: #fff;
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  /* Header */
+  .cover {
+    text-align: center;
+    padding: 48px 0 32px;
+    border-bottom: 3px solid #2563eb;
+    margin-bottom: 40px;
+  }
+  .cover h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+  }
+  .cover .subtitle {
+    font-size: 18px;
+    color: #2563eb;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+  .cover .meta {
+    font-size: 14px;
+    color: #64748b;
+  }
+
+  /* Sections */
+  h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 40px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #334155;
+    margin: 28px 0 12px;
+  }
+  p, li {
+    font-size: 15px;
+    color: #334155;
+    margin-bottom: 8px;
+  }
+  ul { padding-left: 24px; margin-bottom: 16px; }
+
+  /* Summary box */
+  .summary-box {
+    background: #f0f9ff;
+    border-left: 4px solid #2563eb;
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0;
+    margin: 20px 0 28px;
+  }
+  .summary-box p { margin: 0; font-size: 15px; color: #1e40af; }
+
+  /* Screenshot gallery */
+  .screenshot-row {
+    display: flex;
+    gap: 16px;
+    margin: 20px 0 28px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .screenshot-card {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+  .screenshot-card img {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    border: 1px solid #e2e8f0;
+  }
+  .screenshot-card .caption {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  /* Sizes */
+  .screenshot-card img.phone-sm { height: 380px; width: auto; }
+  .screenshot-card img.phone-md { height: 440px; width: auto; }
+  .screenshot-card img.phone-lg { height: 500px; width: auto; }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  thead th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #475569;
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  tbody td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  .pass { color: #16a34a; font-weight: 600; }
+  .ready { color: #2563eb; font-weight: 600; }
+  .flag { color: #dc2626; font-weight: 600; }
+  .warn { color: #f59e0b; font-weight: 600; }
+
+  /* Reconciliation block */
+  .recon-block {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 16px 0 24px;
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #334155;
+  }
+  .recon-block .line {
+    display: flex;
+    justify-content: space-between;
+  }
+  .recon-block .line.bold { font-weight: 700; }
+  .recon-block .line.highlight {
+    background: #f0fdf4;
+    margin: 0 -24px;
+    padding: 4px 24px;
+    border-radius: 6px;
+    color: #16a34a;
+    font-weight: 700;
+  }
+  .recon-block hr {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 8px 0;
+  }
+
+  /* Status badge */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .badge-green { background: #f0fdf4; color: #16a34a; }
+  .badge-blue { background: #eff6ff; color: #2563eb; }
+  .badge-amber { background: #fffbeb; color: #d97706; }
+  .badge-red { background: #fef2f2; color: #dc2626; }
+
+  /* Callout */
+  .callout {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .callout p { color: #92400e; margin: 0; font-size: 14px; }
+  .callout strong { color: #78350f; }
+
+  /* Cost table highlight */
+  .cost-row { background: #f0fdf4; }
+
+  /* Next steps */
+  .next-steps {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+  .next-steps li {
+    counter-increment: step;
+    padding: 12px 16px 12px 48px;
+    position: relative;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    border-radius: 8px;
+  }
+  .next-steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    background: #2563eb;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* Page breaks for print */
+  .page-break { page-break-before: always; }
+
+  @media print {
+    body { padding: 0; }
+    .cover { padding-top: 24px; }
+    h2 { margin-top: 28px; }
+    .screenshot-card img.phone-sm { height: 300px; }
+    .screenshot-card img.phone-md { height: 340px; }
+    .screenshot-card img.phone-lg { height: 400px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <h1>Take 5 Close-Out App</h1>
+  <div class="subtitle">Testing Status Report</div>
+  <div class="meta">
+    March 22, 2026 &nbsp;&bull;&nbsp; Prepared for Take 5 Leadership
+  </div>
+</div>
+
+<!-- ===== EXECUTIVE SUMMARY ===== -->
+<div class="summary-box">
+  <p>
+    The Take 5 Close-Out mobile app has completed its initial round of functional testing.
+    We walked through a <strong>full day's close-out workflow</strong> using AI-generated test receipts
+    for Store #1205 (Johnson City 1). After working through roughly 10 bugs encountered during testing,
+    all core features — photo capture, OCR extraction, reconciliation
+    math, and submission — <strong>are now working as expected</strong>.
+  </p>
+</div>
+
+<!-- ===== NIGHTLY CLOSE-OUT FLOW ===== -->
+<h2>Nightly Close-Out Flow</h2>
+
+<h3>Step 1 — Select Type &amp; Store</h3>
+<p>
+  The manager selects "Nightly Close-Out" or "Deposit Slip" and confirms their store.
+  Store details (name, number, market, bank) auto-populate from the manager's account.
+</p>
+
+<div class="screenshot-row">
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8754.jpg" alt="Step 1: Select Type" class="phone-md">
+    <div class="caption">Step 1 — Type selection with store auto-populated</div>
+  </div>
+</div>
+
+<h3>Step 2 — Photos &amp; OCR Auto-Fill</h3>
+<p>
+  The manager photographs each receipt. The app sends each photo through OCR and
+  auto-fills the corresponding fields (marked with a green "OCR" badge). All values
+  remain editable if the manager needs to correct anything.
+</p>
+
+<div class="screenshot-row">
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8755.jpg" alt="Step 2: POS + Batch Photos" class="phone-md">
+    <div class="caption">POS Report photographed — all 5 fields auto-filled by OCR</div>
+  </div>
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8756.jpg" alt="Step 2: Terminal 4 + Cash" class="phone-md">
+    <div class="caption">Batch receipts filled, cash counted matches expected</div>
+  </div>
+</div>
+
+<h3>OCR Accuracy — This Test</h3>
+<table>
+  <thead>
+    <tr><th>Document</th><th>Fields Extracted</th><th>Result</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POS Close-Out Report</td>
+      <td>Gross Sales ($4,892.15) &bull; Fleets ($312.45) &bull; Tax ($421.30) &bull; Payouts ($0.00) &bull; Total ($5,001.00)</td>
+      <td><span class="pass">5/5 correct</span></td>
+    </tr>
+    <tr>
+      <td>Batch — Terminal 1</td>
+      <td>Total ($1,425.60) &bull; Tips ($38.00) &bull; Records (13)</td>
+      <td><span class="pass">3/3 correct</span></td>
+    </tr>
+    <tr>
+      <td>Batch — Terminal 2</td>
+      <td>Total ($1,345.88) &bull; Tips ($31.00) &bull; Records (13)</td>
+      <td><span class="pass">3/3 correct</span></td>
+    </tr>
+    <tr>
+      <td>Batch — Terminal 3</td>
+      <td>Total ($678.10) &bull; Tips ($15.00) &bull; Records (6)</td>
+      <td><span class="pass">3/3 correct</span></td>
+    </tr>
+    <tr>
+      <td>Batch — Terminal 4</td>
+      <td>Total ($987.42) &bull; Tips ($22.00) &bull; Records (7)</td>
+      <td><span class="pass">3/3 correct</span></td>
+    </tr>
+    <tr>
+      <td>Deposit Slip</td>
+      <td>Amount ($670.00) &bull; Date (2026-03-11)</td>
+      <td><span class="pass">2/2 correct</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== REVIEW & SUBMIT ===== -->
+<h3>Step 3 — Review, Reconciliation &amp; Submit</h3>
+<p>
+  Before submitting, the manager sees a full reconciliation breakdown.
+  The app calculates expected cash from the POS and batch data, compares it to
+  the cash counted, and flags any variance over $15.
+</p>
+
+<div class="screenshot-row">
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8758.jpg" alt="Reconciliation Card" class="phone-md">
+    <div class="caption">Reconciliation card — all math checks out</div>
+  </div>
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8759.jpg" alt="Summary & Submit" class="phone-md">
+    <div class="caption">Summary with $0.00 variance — ready to submit</div>
+  </div>
+</div>
+
+<h3>Reconciliation Math (Verified)</h3>
+<div class="recon-block">
+  <div class="line"><span>Gross Sales</span><span>$4,892.15</span></div>
+  <div class="line"><span>Fleets</span><span>$312.45</span></div>
+  <div class="line"><span>Sales Tax</span><span>$421.30</span></div>
+  <div class="line"><span>Payouts</span><span>$0.00</span></div>
+  <div class="line bold"><span>POS Total Receipts</span><span>$5,001.00</span></div>
+  <hr>
+  <div class="line"><span>Batch 1 (Tips: $38.00 &bull; 13 recs)</span><span>$1,425.60</span></div>
+  <div class="line"><span>Batch 2 (Tips: $31.00 &bull; 13 recs)</span><span>$1,345.88</span></div>
+  <div class="line"><span>Batch 3 (Tips: $15.00 &bull; 6 recs)</span><span>$678.10</span></div>
+  <div class="line"><span>Batch 4 (Tips: $22.00 &bull; 7 recs)</span><span>$987.42</span></div>
+  <div class="line bold"><span>Total Batches</span><span>$4,437.00</span></div>
+  <div class="line" style="color:#dc2626"><span>Total Tips</span><span>-$106.00</span></div>
+  <div class="line bold"><span>Card Sales (Batches - Tips)</span><span>$4,331.00</span></div>
+  <hr>
+  <div class="line"><span>Expected Cash Deposit</span><span>$670.00</span></div>
+  <div class="line"><span>Cash Counted</span><span>$670.00</span></div>
+  <div class="line highlight"><span>Cash Variance</span><span>$0.00 &#10003;</span></div>
+</div>
+
+<!-- ===== DEPOSIT SLIP FLOW ===== -->
+<h2 class="page-break">Deposit Slip Flow</h2>
+<p>
+  After the manager makes the bank deposit, they come back to the app, select "Deposit Slip,"
+  photograph the deposit receipt, and the app links it to the matching nightly close-out.
+</p>
+
+<div class="screenshot-row">
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8760.jpg" alt="Deposit Slip Photo + OCR" class="phone-md">
+    <div class="caption">Deposit slip photographed — amount &amp; date auto-filled</div>
+  </div>
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8761.jpg" alt="Deposit Slip Review" class="phone-md">
+    <div class="caption">Deposit review — ready to submit</div>
+  </div>
+</div>
+
+<!-- ===== HISTORY ===== -->
+<h2>Submission History</h2>
+<p>
+  After both submissions, the manager's History tab shows the nightly close-out and
+  deposit slip side by side, each with a "Pending Review" status until office staff reviews them.
+</p>
+
+<div class="screenshot-row">
+  <div class="screenshot-card">
+    <img src="screenshots/IMG_8757.jpg" alt="History View" class="phone-md">
+    <div class="caption">History — both submissions visible with status</div>
+  </div>
+</div>
+
+<!-- ===== TESTING SCOPE ===== -->
+<h2 class="page-break">Testing Coverage</h2>
+
+<h3>What Has Been Tested</h3>
+<table>
+  <thead>
+    <tr><th>Area</th><th>Details</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Nightly close-out wizard (3 steps)</td><td>Full end-to-end with 5 photos</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>Deposit slip wizard</td><td>Photo + OCR + submission</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>OCR extraction — POS report</td><td>5 fields, all correct</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>OCR extraction — Batch receipts</td><td>3 fields &times; 4 terminals, all correct</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>OCR extraction — Deposit slip</td><td>2 fields, both correct</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>Reconciliation math</td><td>$0.00 variance confirmed</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>Cash verification</td><td>Green checkmark when cash matches</td><td><span class="badge badge-green">Passed</span></td></tr>
+    <tr><td>Submission history</td><td>Both entries appear with correct data</td><td><span class="badge badge-green">Passed</span></td></tr>
+  </tbody>
+</table>
+
+<h3>What Has NOT Been Tested Yet</h3>
+<table>
+  <thead>
+    <tr><th>Area</th><th>Why It Matters</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Real receipts (thermal paper)</td>
+      <td>AI-generated receipts are cleaner than actual store receipts — OCR on crumpled, faded, or poorly-lit paper is the biggest remaining unknown</td>
+      <td><span class="badge badge-red">Not tested</span></td>
+    </tr>
+    <tr>
+      <td>Variance &gt; $15 flagging</td>
+      <td>Triggers required reason code picker — built but not exercised</td>
+      <td><span class="badge badge-amber">Ready to test</span></td>
+    </tr>
+    <tr>
+      <td>Office compliance dashboard</td>
+      <td>Market filters, store status cards, drill-down — needs live data</td>
+      <td><span class="badge badge-amber">Needs live data</span></td>
+    </tr>
+    <tr>
+      <td>Email notifications</td>
+      <td>10 PM nightly check + 2 PM deposit follow-up — built, not deployed</td>
+      <td><span class="badge badge-amber">Needs deployment</span></td>
+    </tr>
+    <tr>
+      <td>Multiple stores / users</td>
+      <td>Verify each manager only sees their own store data</td>
+      <td><span class="badge badge-red">Not tested</span></td>
+    </tr>
+    <tr>
+      <td>Offline mode</td>
+      <td>Queue submissions when offline, sync when reconnected</td>
+      <td><span class="badge badge-red">Not tested</span></td>
+    </tr>
+    <tr>
+      <td>Days 2 &amp; 3 test data</td>
+      <td>Include small variance ($8.50) and flagged variance ($36.50)</td>
+      <td><span class="badge badge-blue">Ready</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <p>
+    <strong>Key risk:</strong> All testing so far used AI-generated receipts, which are cleaner and more
+    consistent than real thermal paper receipts. Testing with actual store receipts is the most
+    important next step before going live.
+  </p>
+</div>
+
+<!-- ===== TEST DATA AVAILABLE ===== -->
+<h2>Test Data Available</h2>
+
+<h3>AI-Generated Receipt Days (Store #1205 Johnson City)</h3>
+<table>
+  <thead>
+    <tr><th>Day</th><th>Date</th><th>POS Total</th><th>Total Batches</th><th>Cash</th><th>Variance</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Day 1</td><td>03/10/2026</td><td>$5,001.00</td><td>$4,437.00</td><td>$670.00</td>
+      <td>$0.00</td><td><span class="badge badge-green">Tested</span></td>
+    </tr>
+    <tr>
+      <td>Day 2</td><td>03/11/2026</td><td>$5,388.00</td><td>$5,061.00</td><td>$441.00</td>
+      <td>+$8.50</td><td><span class="badge badge-blue">Ready</span></td>
+    </tr>
+    <tr>
+      <td>Day 3</td><td>03/12/2026</td><td>$5,823.00</td><td>$5,518.00</td><td>$412.50</td>
+      <td class="flag">+$36.50</td><td><span class="badge badge-blue">Ready</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Written Test Scenarios (10 scenarios across 7 stores)</h3>
+<table>
+  <thead>
+    <tr><th>#</th><th>Store</th><th>Variance</th><th>Flagged</th><th>Scenario</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Johnson City 1</td><td>-$0.01</td><td>No</td><td>Perfect reconciliation</td></tr>
+    <tr><td>2</td><td>Augusta 1</td><td>-$446.50</td><td>Yes</td><td>Tips not backed out</td></tr>
+    <tr><td>3</td><td>Aiken 1</td><td>+$417.70</td><td>Yes</td><td>Fleet card mismatch</td></tr>
+    <tr><td>4</td><td>Kingsport 3</td><td>-$142.85</td><td>Yes</td><td>Split batch</td></tr>
+    <tr><td>5</td><td>Asheville 1</td><td>-$158.30</td><td>Yes</td><td>Manual entry error</td></tr>
+    <tr><td>6</td><td>Bristol 1</td><td>+$113.00</td><td>Yes</td><td>Refund after close</td></tr>
+    <tr><td>7</td><td>Augusta 3</td><td>$0.00</td><td>No</td><td>Clean 4-terminal day</td></tr>
+    <tr><td>8</td><td>Hendersonville</td><td>+$3.42</td><td>No</td><td>Small rounding (under $15)</td></tr>
+    <tr><td>9</td><td>Greeneville 1</td><td>+$56.00</td><td>Yes</td><td>Late deposit (4 days)</td></tr>
+    <tr><td>10</td><td>North Augusta</td><td>-$185.00</td><td>Yes</td><td>Missing deposit</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== COST ===== -->
+<h2>Estimated OCR Cost at Scale</h2>
+<table>
+  <thead>
+    <tr><th>Period</th><th>Est. Photos (16 stores)</th><th>Cost</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Daily</td><td>~80–96 photos</td><td>$0.35–$0.60</td></tr>
+    <tr class="cost-row"><td><strong>Monthly</strong></td><td><strong>~2,400–2,900 photos</strong></td><td><strong>$10–$15</strong></td></tr>
+  </tbody>
+</table>
+
+<!-- ===== NEXT STEPS ===== -->
+<h2>Recommended Next Steps</h2>
+<ol class="next-steps">
+  <li>
+    <strong>Test with real receipts</strong> — Have a store manager photograph actual POS reports and batch receipts from a recent close-out. This is the single most important test before going live.
+  </li>
+  <li>
+    <strong>Run Day 2 and Day 3 test data</strong> — Exercise the variance flagging and reason-code workflow using the remaining AI-generated receipts.
+  </li>
+  <li>
+    <strong>Deploy to a pilot store</strong> — Pick one store (Johnson City 1 recommended) for a 1-week live pilot running alongside the current paper process.
+  </li>
+  <li>
+    <strong>Set up email notifications</strong> — Configure email service and deploy the nightly compliance check and deposit follow-up alerts.
+  </li>
+  <li>
+    <strong>Create office user accounts</strong> — Set up office staff access so the compliance dashboard can be validated with real submissions flowing in.
+  </li>
+</ol>
+
+<div style="margin-top: 48px; padding-top: 16px; border-top: 1px solid #e2e8f0; text-align: center; color: #94a3b8; font-size: 13px;">
+  Take 5 Close-Out App &bull; Testing Status Report &bull; March 22, 2026
+</div>
+
+</body>
+</html>

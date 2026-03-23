@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take 5 Close-Out App</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #f1f5f9; color: #1e293b;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .container { max-width: 520px; width: 100%; }
+
+  .header {
+    text-align: center; margin-bottom: 28px;
+  }
+  .header h1 { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .header .subtitle { font-size: 15px; color: #64748b; }
+
+  .card {
+    background: #fff; border-radius: 14px; overflow: hidden;
+    border: 1px solid #e2e8f0; margin-bottom: 14px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none; display: block; color: inherit;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .card-inner {
+    padding: 22px 24px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .card-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; flex-shrink: 0;
+  }
+  .icon-blue { background: #eff6ff; }
+  .icon-green { background: #f0fdf4; }
+  .icon-purple { background: #f5f3ff; }
+  .card-text h2 { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 3px; }
+  .card-text p { font-size: 13px; color: #64748b; line-height: 1.5; }
+  .card-arrow {
+    margin-left: auto; font-size: 20px; color: #cbd5e1; flex-shrink: 0;
+  }
+  .card:hover .card-arrow { color: #2563eb; }
+
+  .footer {
+    text-align: center; margin-top: 24px;
+    font-size: 13px; color: #94a3b8;
+  }
+  .footer a { color: #2563eb; text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>Take 5 Close-Out App</h1>
+    <div class="subtitle">Setup documents from Elliott English</div>
+  </div>
+
+  <a href="status.html" class="card">
+    <div class="card-inner">
+      <div class="card-icon icon-purple">&#128202;</div>
+      <div class="card-text">
+        <h2>Testing Status Report</h2>
+        <p>Current state of the app with screenshots, OCR test results, and what's been verified so far.</p>
+      </div>
+      <div class="card-arrow">&#8250;</div>
+    </div>
+  </a>
+
+  <a href="checklist.html" class="card">
+    <div class="card-inner">
+      <div class="card-icon icon-blue">&#9997;</div>
+      <div class="card-text">
+        <h2>Go-Live Checklist</h2>
+        <p>Fill in manager names, emails, store verification, and other info needed to launch the app.</p>
+      </div>
+      <div class="card-arrow">&#8250;</div>
+    </div>
+  </a>
+
+  <a href="backup.html" class="card">
+    <div class="card-inner">
+      <div class="card-icon icon-green">&#128274;</div>
+      <div class="card-text">
+        <h2>Backup Setup Instructions</h2>
+        <p>Step-by-step guide to set up Cloudflare R2 and GitHub for automatic nightly backups.</p>
+      </div>
+      <div class="card-arrow">&#8250;</div>
+    </div>
+  </a>
+
+  <div class="footer">
+    Questions? Email <a href="mailto:t.elliott.english@gmail.com">t.elliott.english@gmail.com</a>
+  </div>
+</div>
+
+</body>
+</html>

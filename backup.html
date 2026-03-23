@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Take 5 — Backup Setup Instructions</title>
+<style>
+  @page { size: letter; margin: 0.6in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #1e293b; background: #f1f5f9; line-height: 1.6;
+  }
+  .page-wrap { max-width: 860px; margin: 0 auto; padding: 24px 16px; }
+
+  .cover {
+    text-align: center; padding: 36px 24px 28px;
+    background: #fff; border-radius: 12px; margin-bottom: 20px;
+    border-bottom: 4px solid #2563eb;
+  }
+  .cover h1 { font-size: 26px; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .cover .subtitle { font-size: 17px; color: #2563eb; font-weight: 600; margin-bottom: 16px; }
+  .cover .meta { font-size: 14px; color: #64748b; }
+
+  .card {
+    background: #fff; border-radius: 12px; padding: 24px 28px;
+    margin-bottom: 16px; border: 1px solid #e2e8f0;
+  }
+
+  h2 {
+    font-size: 19px; font-weight: 700; color: #1e293b;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-number {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; flex-shrink: 0;
+    background: #2563eb; color: #fff; border-radius: 50%;
+    font-size: 14px; font-weight: 700;
+  }
+  h3 { font-size: 15px; font-weight: 600; color: #334155; margin: 20px 0 8px; }
+  p { font-size: 14px; color: #475569; margin-bottom: 10px; }
+  a { color: #2563eb; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .intro-box {
+    background: #eff6ff; border-left: 4px solid #2563eb;
+    padding: 16px 20px; border-radius: 0 8px 8px 0; margin-bottom: 16px;
+  }
+  .intro-box p { margin: 0; font-size: 14px; color: #1e40af; }
+
+  .check-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 12px; margin-bottom: 6px;
+    background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;
+    cursor: pointer; transition: background 0.15s;
+  }
+  .check-item:hover { background: #f1f5f9; }
+  .check-item input[type="checkbox"] {
+    width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0;
+    accent-color: #2563eb; cursor: pointer;
+  }
+  .check-item.checked { background: #f0fdf4; border-color: #bbf7d0; }
+  .check-item label { cursor: pointer; font-size: 14px; flex: 1; }
+  .check-item .detail { display: block; font-size: 12px; color: #64748b; margin-top: 3px; }
+
+  .input-row { display: flex; gap: 12px; align-items: end; margin-bottom: 10px; }
+  .input-group { flex: 1; }
+  .input-group label {
+    display: block; font-size: 12px; font-weight: 600; color: #64748b;
+    margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  input[type="text"], input[type="email"] {
+    width: 100%; padding: 8px 12px; border: 1px solid #cbd5e1;
+    border-radius: 6px; font-size: 14px; font-family: inherit; color: #1e293b;
+    background: #fff; transition: border-color 0.15s;
+  }
+  input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+  input::placeholder { color: #94a3b8; }
+
+  .note {
+    background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
+    padding: 12px 16px; margin: 12px 0;
+  }
+  .note p { color: #166534; margin: 0; font-size: 13px; }
+
+  .warn {
+    background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
+    padding: 12px 16px; margin: 12px 0;
+  }
+  .warn p { color: #92400e; margin: 0; font-size: 13px; }
+
+  .screenshot-hint {
+    background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 10px;
+    padding: 16px 20px; margin: 12px 0; text-align: center; color: #64748b;
+    font-size: 13px;
+  }
+  .screenshot-hint strong { color: #475569; }
+
+  /* What this looks like section */
+  .path-display {
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+    background: #1e293b; color: #e2e8f0; border-radius: 8px;
+    padding: 16px 20px; margin: 12px 0; font-size: 13px;
+    line-height: 1.8; overflow-x: auto;
+  }
+  .path-display .comment { color: #64748b; }
+  .path-display .highlight { color: #93c5fd; }
+
+  .action-bar {
+    position: sticky; bottom: 0;
+    background: #fff; border-top: 1px solid #e2e8f0;
+    padding: 12px 28px;
+    display: flex; gap: 12px; justify-content: flex-end; align-items: center;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05); margin-top: 8px;
+  }
+  .action-bar .status { flex: 1; font-size: 13px; color: #64748b; }
+  .action-bar .status strong { color: #2563eb; }
+  .btn {
+    padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-primary { background: #2563eb; color: #fff; }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-secondary { background: #f1f5f9; color: #475569; }
+  .btn-secondary:hover { background: #e2e8f0; }
+
+  @media print {
+    body { background: #fff; }
+    .page-wrap { padding: 0; max-width: none; }
+    .card { border: none; padding: 16px 0; margin-bottom: 8px; box-shadow: none; }
+    .action-bar { display: none; }
+    .check-item { background: #fff; border: 1px solid #ccc; }
+    input[type="text"], input[type="email"] {
+      border: none; border-bottom: 1px solid #999; border-radius: 0;
+      padding: 4px 2px; box-shadow: none;
+    }
+    h2 { page-break-after: avoid; }
+    .card { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+<!-- COVER -->
+<div class="cover">
+  <h1>Take 5 Close-Out App</h1>
+  <div class="subtitle">Backup Setup Instructions</div>
+  <div class="meta">March 2026</div>
+</div>
+
+<div class="card">
+  <div class="intro-box">
+    <p>
+      These are the setup instructions for your <strong>automatic nightly backups</strong>.
+      Every night, your database and all receipt photos are backed up to secure cloud storage.
+      You need two free accounts — <strong>Cloudflare R2</strong> (where the backups are stored) and
+      <strong>GitHub</strong> (which runs the automated backup job). Both are free and both take about 5 minutes to set up.
+      Once done, send the details to
+      <strong>Elliott English</strong> (<a href="mailto:t.elliott.english@gmail.com">t.elliott.english@gmail.com</a>)
+      and I'll connect everything.
+    </p>
+  </div>
+</div>
+
+<!-- WHAT THIS DOES -->
+<div class="card">
+  <h2><span class="section-number">&#8505;</span> What This Does</h2>
+  <p>Every night at midnight, an automated job runs that:</p>
+  <ul style="padding-left: 20px; margin: 8px 0 12px; font-size: 14px; color: #475569;">
+    <li style="margin-bottom:4px;">Backs up your entire database (all submissions, user accounts, store data)</li>
+    <li style="margin-bottom:4px;">Copies all receipt photos to a separate backup location</li>
+    <li style="margin-bottom:4px;">Keeps 30 days of database backups, then automatically removes older ones</li>
+  </ul>
+  <p>If anything ever goes wrong with the main system, we can restore everything from these backups.</p>
+
+  <div class="path-display">
+    <span class="comment"># What the backups look like in storage:</span><br>
+    <span class="highlight">take5-backups/</span><br>
+    &nbsp;&nbsp;db/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;take5_backup_2026-03-23.dump &nbsp;&nbsp;<span class="comment">← full database backup</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;take5_data_2026-03-23.sql.gz &nbsp;&nbsp;<span class="comment">← readable copy</span><br>
+    &nbsp;&nbsp;photos/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;1205/20260310/pos_closeout/... &nbsp;<span class="comment">← receipt photos by store & date</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;1205/20260310/batch_receipt/...<br>
+  </div>
+
+  <div class="note">
+    <p><strong>Cost:</strong> Both services are completely free at the scale we need. Cloudflare R2 includes 10GB of free storage (we'll use about 1-2GB over the first year). GitHub includes 2,000 free minutes/month for automated jobs (we use about 60-90).</p>
+  </div>
+</div>
+
+<!-- PART 1: CLOUDFLARE R2 -->
+<div class="card" id="section-1">
+  <h2><span class="section-number">1</span> Cloudflare R2 (Backup Storage)</h2>
+  <p>
+    Cloudflare R2 is a cloud storage service — think of it like a secure filing cabinet in the cloud
+    where your backups are kept. Here's how to set it up:
+  </p>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Go to <a href="https://dash.cloudflare.com/sign-up" target="_blank">dash.cloudflare.com/sign-up</a></strong> and create a free account
+      <span class="detail">Use a company email. You do NOT need to add a website or domain — just create the account.</span>
+    </label>
+  </div>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>In the left sidebar, click "R2 Object Storage"</strong>
+      <span class="detail">If prompted to add payment info, this is just for identity verification — you won't be charged on the free tier. R2 has no charges until you exceed 10GB of storage.</span>
+    </label>
+  </div>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Click "Create bucket"</strong> and name it <strong>take5-backups</strong>
+      <span class="detail">
+        &bull; Bucket name: <strong>take5-backups</strong><br>
+        &bull; Location: <strong>Eastern North America</strong> (or "Automatic" is fine too)<br>
+        &bull; Leave all other settings as default<br>
+        &bull; Click "Create bucket"
+      </span>
+    </label>
+  </div>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Create an API token</strong> for the backup job
+      <span class="detail">
+        &bull; Go to <strong>R2 Object Storage</strong> &rarr; <strong>Manage R2 API Tokens</strong> (top right area)<br>
+        &bull; Click <strong>"Create API token"</strong><br>
+        &bull; Token name: <strong>take5-backup</strong><br>
+        &bull; Permissions: <strong>Object Read &amp; Write</strong><br>
+        &bull; Specify bucket: <strong>take5-backups</strong><br>
+        &bull; Click "Create API Token"<br>
+        &bull; <strong>IMPORTANT:</strong> You'll see an <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>. Copy both and save them — you can only see the secret key once!
+      </span>
+    </label>
+  </div>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Find your Account ID</strong>
+      <span class="detail">It's shown on the R2 overview page in the right sidebar, or in your browser URL bar. It's a long string of letters and numbers.</span>
+    </label>
+  </div>
+
+  <h3>Send me these 3 values:</h3>
+
+  <div class="input-group" style="margin-bottom:10px;">
+    <label>R2 Account ID</label>
+    <input type="text" placeholder="e.g. a1b2c3d4e5f6..." data-section="1">
+  </div>
+  <div class="input-group" style="margin-bottom:10px;">
+    <label>R2 Access Key ID</label>
+    <input type="text" placeholder="Starts with a long string of characters" data-section="1">
+  </div>
+  <div class="input-group" style="margin-bottom:10px;">
+    <label>R2 Secret Access Key</label>
+    <input type="text" placeholder="The secret key shown only once during token creation" data-section="1">
+  </div>
+
+  <div class="warn">
+    <p><strong>Security:</strong> Send these values to me via text message or phone call — not in the same email as this document. These are like passwords and should be handled carefully.</p>
+  </div>
+</div>
+
+<!-- PART 2: GITHUB -->
+<div class="card" id="section-2">
+  <h2><span class="section-number">2</span> GitHub (Runs the Backup Job)</h2>
+  <p>
+    GitHub is a platform used by developers to store code and run automated tasks.
+    We use it to run the nightly backup job — you don't need to learn how it works,
+    just create a free account and invite me. I'll set up everything else.
+  </p>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Go to <a href="https://github.com/signup" target="_blank">github.com/signup</a></strong> and create a free account
+      <span class="detail">Use the same company email you used for Supabase and Cloudflare. Choose a username — it can be anything (e.g. "take5oilchange").</span>
+    </label>
+  </div>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Send me your GitHub username</strong> and I'll set up the backup project
+      <span class="detail">I'll create a repository (project) under your account for the backup job, then you'll invite me as a collaborator so I can manage it.</span>
+    </label>
+  </div>
+
+  <div class="input-group" style="margin-top:12px;">
+    <label>GitHub username</label>
+    <input type="text" placeholder="e.g. take5oilchange" data-section="2">
+  </div>
+
+  <div class="note">
+    <p><strong>After I set this up:</strong> the backup will run automatically every night. You can check it anytime at github.com — there's a green checkmark if it ran successfully, or a red X if something went wrong (I'll get notified too).</p>
+  </div>
+</div>
+
+<!-- PART 3: INVITE ME -->
+<div class="card" id="section-3">
+  <h2><span class="section-number">3</span> Invite Elliott as Collaborator</h2>
+  <p>
+    After I create the backup project, I'll walk you through inviting me as a collaborator.
+    This takes 30 seconds — here's what it looks like:
+  </p>
+
+  <div class="check-item" onclick="toggleCheck(this)">
+    <input type="checkbox">
+    <label>
+      <strong>Go to your repository</strong> &rarr; <strong>Settings</strong> &rarr; <strong>Collaborators</strong> &rarr; <strong>Add people</strong>
+      <span class="detail">
+        &bull; Search for: <strong>t.elliott.english@gmail.com</strong> or my GitHub username (I'll tell you which)<br>
+        &bull; Role: <strong>Admin</strong><br>
+        &bull; This lets me set up the backup credentials and manage the automated job
+      </span>
+    </label>
+  </div>
+
+  <div class="note">
+    <p><strong>You own everything.</strong> The GitHub account, the repository, and the R2 backup storage are all under your control. My collaborator access lets me do the technical setup and fix things if something breaks — but you can remove my access at any time.</p>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="card">
+  <h2><span class="section-number">&#10003;</span> Summary — What to Send Elliott</h2>
+
+  <table style="width:100%; border-collapse:collapse; font-size:14px; margin:8px 0;">
+    <thead>
+      <tr>
+        <th style="text-align:left; padding:8px; border-bottom:2px solid #e2e8f0; background:#f8fafc; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; color:#475569;">Item</th>
+        <th style="text-align:left; padding:8px; border-bottom:2px solid #e2e8f0; background:#f8fafc; font-size:12px; text-transform:uppercase; letter-spacing:0.5px; color:#475569;">How to Send</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:8px; border-bottom:1px solid #f1f5f9;">R2 Account ID</td><td style="padding:8px; border-bottom:1px solid #f1f5f9;">Text or call</td></tr>
+      <tr><td style="padding:8px; border-bottom:1px solid #f1f5f9;">R2 Access Key ID</td><td style="padding:8px; border-bottom:1px solid #f1f5f9;">Text or call</td></tr>
+      <tr><td style="padding:8px; border-bottom:1px solid #f1f5f9;">R2 Secret Access Key</td><td style="padding:8px; border-bottom:1px solid #f1f5f9;">Text or call</td></tr>
+      <tr><td style="padding:8px; border-bottom:1px solid #f1f5f9;">GitHub username</td><td style="padding:8px; border-bottom:1px solid #f1f5f9;">This form, text, or email</td></tr>
+      <tr><td style="padding:8px;">Invite Elliott as collaborator on the repo</td><td style="padding:8px;">I'll walk you through it after creating the project</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note" style="margin-top:16px;">
+    <p><strong>Once I have this info:</strong> I'll connect the backup system to your Supabase database. From that point on, your data and photos are automatically backed up every night with no action needed from you. I'll confirm when it's running.</p>
+    <p style="margin-top:8px;">— <strong>Elliott English</strong> &bull; <a href="mailto:t.elliott.english@gmail.com">t.elliott.english@gmail.com</a></p>
+  </div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <div class="status">
+    <strong id="filled-count">0</strong> of <strong id="total-fields">0</strong> fields completed
+  </div>
+  <button class="btn btn-secondary" onclick="saveProgress()">Save Progress</button>
+  <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+</div>
+
+</div><!-- /page-wrap -->
+
+<script>
+  function toggleCheck(el) {
+    const cb = el.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    el.classList.toggle('checked', cb.checked);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const inputs = document.querySelectorAll('input[data-section]');
+    const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+    let filled = 0, total = 0;
+    inputs.forEach(input => {
+      total++;
+      if (input.value && input.value.trim() !== '') filled++;
+    });
+    checkboxes.forEach(cb => {
+      total++;
+      if (cb.checked) filled++;
+    });
+    document.getElementById('filled-count').textContent = filled;
+    document.getElementById('total-fields').textContent = total;
+  }
+
+  function saveProgress() {
+    const data = {};
+    document.querySelectorAll('input[data-section]').forEach((el, i) => {
+      data['field_' + i] = el.value;
+    });
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach((cb, i) => {
+      data['check_' + i] = cb.checked;
+    });
+    localStorage.setItem('take5_backup_setup', JSON.stringify(data));
+    alert('Progress saved! You can close this page and come back later.');
+  }
+
+  function restoreProgress() {
+    const raw = localStorage.getItem('take5_backup_setup');
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    document.querySelectorAll('input[data-section]').forEach((el, i) => {
+      if (data['field_' + i] !== undefined) el.value = data['field_' + i];
+    });
+    document.querySelectorAll('.check-item input[type="checkbox"]').forEach((cb, i) => {
+      if (data['check_' + i]) {
+        cb.checked = true;
+        cb.closest('.check-item').classList.add('checked');
+      }
+    });
+    updateProgress();
+  }
+
+  document.addEventListener('input', updateProgress);
+  document.addEventListener('change', updateProgress);
+  restoreProgress();
+  updateProgress();
+</script>
+
+</body>
+</html>
