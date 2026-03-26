@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>App Demo — Take 5 Close-Out App</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #f8fafc; color: #1e293b; line-height: 1.6;
+  }
+  .banner {
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+    color: #fff; padding: 40px 24px; text-align: center;
+  }
+  .banner h1 { font-size: 26px; font-weight: 700; }
+  .banner p { font-size: 15px; color: #bfdbfe; margin-top: 6px; }
+  .banner .date { font-size: 13px; color: #93c5fd; margin-top: 4px; }
+  .content { max-width: 760px; margin: 0 auto; padding: 32px 20px; }
+
+  .summary-box {
+    background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px;
+    padding: 20px; margin-bottom: 28px;
+  }
+  .summary-box h2 { font-size: 18px; font-weight: 700; color: #166534; margin-bottom: 10px; }
+  .summary-box ul { list-style: none; padding: 0; }
+  .summary-box li {
+    padding: 6px 0; font-size: 14px; color: #1e293b;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .summary-box li::before { content: "✓"; color: #16a34a; font-weight: 700; }
+
+  .section { margin-bottom: 36px; }
+  .section h2 {
+    font-size: 20px; font-weight: 700; color: #1e293b;
+    margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+  }
+  .section h2 .badge {
+    background: #2563eb; color: #fff; font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 10px; text-transform: uppercase;
+  }
+  .section p { font-size: 14px; color: #64748b; margin-bottom: 16px; }
+
+  .video-card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+    overflow: hidden; margin-bottom: 16px;
+  }
+  .video-card .video-header {
+    padding: 16px 20px; border-bottom: 1px solid #f1f5f9;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .video-card .video-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .video-card h3 { font-size: 16px; font-weight: 600; color: #1e293b; }
+  .video-card .video-desc { font-size: 13px; color: #64748b; margin-top: 2px; }
+  .video-card .video-link {
+    display: block; padding: 14px 20px; text-align: center;
+    background: #2563eb; color: #fff; font-weight: 600; font-size: 15px;
+    text-decoration: none; transition: background 0.15s;
+  }
+  .video-card .video-link:hover { background: #1d4ed8; }
+
+  .status-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;
+  }
+  .status-item {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px;
+  }
+  .status-item .label { font-size: 12px; color: #94a3b8; font-weight: 600; text-transform: uppercase; }
+  .status-item .value { font-size: 18px; font-weight: 700; color: #1e293b; margin-top: 4px; }
+  .status-item .value.green { color: #16a34a; }
+  .status-item .value.blue { color: #2563eb; }
+
+  .next-steps {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px;
+    padding: 20px; margin-bottom: 24px;
+  }
+  .next-steps h2 { font-size: 18px; font-weight: 700; color: #1e40af; margin-bottom: 12px; }
+  .next-steps ol { padding-left: 20px; }
+  .next-steps li { padding: 6px 0; font-size: 14px; color: #1e293b; }
+  .next-steps li strong { color: #1e40af; }
+
+  .question-box {
+    background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px;
+    padding: 20px; margin-bottom: 24px;
+  }
+  .question-box h2 { font-size: 18px; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+  .question-box p { font-size: 14px; color: #78350f; }
+
+  .footer {
+    text-align: center; padding: 24px; font-size: 13px; color: #94a3b8;
+    border-top: 1px solid #e2e8f0; margin-top: 20px;
+  }
+  .footer a { color: #2563eb; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .status-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1>Take 5 Close-Out App</h1>
+  <p>Project Update &amp; Demo Videos</p>
+  <div class="date">March 26, 2026</div>
+</div>
+
+<div class="content">
+
+  <!-- Summary -->
+  <div class="summary-box">
+    <h2>What's Done</h2>
+    <ul>
+      <li>App built and tested with real Hendersonville receipts — 100% OCR accuracy</li>
+      <li>All 34 user accounts created (16 primary managers, 12 additional managers, 5 office staff, 1 admin)</li>
+      <li>Web dashboard live for office/admin staff</li>
+      <li>Automated email notifications scheduled (10 PM nightly compliance, 2 PM deposit alerts)</li>
+      <li>Nightly database backups running automatically</li>
+      <li>Edge functions deployed (OCR, compliance check, deposit follow-up)</li>
+    </ul>
+  </div>
+
+  <!-- Status Grid -->
+  <div class="status-grid">
+    <div class="status-item">
+      <div class="label">User Accounts</div>
+      <div class="value green">34 Created</div>
+    </div>
+    <div class="status-item">
+      <div class="label">Stores</div>
+      <div class="value blue">16 Active</div>
+    </div>
+    <div class="status-item">
+      <div class="label">OCR Accuracy</div>
+      <div class="value green">100%</div>
+    </div>
+    <div class="status-item">
+      <div class="label">Pilot Store</div>
+      <div class="value blue">Johnson City 1</div>
+    </div>
+  </div>
+
+  <!-- Demo Videos -->
+  <div class="section">
+    <h2>Demo Videos <span class="badge">Watch These</span></h2>
+    <p>Two short walkthroughs showing how the app works for each role.</p>
+
+    <div class="video-card">
+      <div class="video-header">
+        <div class="video-icon" style="background: #fef3c7;">📱</div>
+        <div>
+          <h3>Manager Role</h3>
+          <div class="video-desc">How store managers submit nightly close-outs and deposit slips from their phone</div>
+        </div>
+      </div>
+      <a href="https://share.descript.com/view/i16u4haxA5B" target="_blank" class="video-link">
+        Watch Manager Demo →
+      </a>
+    </div>
+
+    <div class="video-card">
+      <div class="video-header">
+        <div class="video-icon" style="background: #eff6ff;">💻</div>
+        <div>
+          <h3>Admin / Supervisor Role</h3>
+          <div class="video-desc">How office staff monitor compliance, review submissions, and track deposits</div>
+        </div>
+      </div>
+      <a href="https://share.descript.com/view/0J6upRDxMYI" target="_blank" class="video-link">
+        Watch Admin Demo →
+      </a>
+    </div>
+  </div>
+
+  <!-- Next Steps -->
+  <div class="next-steps">
+    <h2>Next Steps</h2>
+    <ol>
+      <li><strong>Review the demo videos</strong> and let me know if the workflow matches how your team operates</li>
+      <li><strong>Pilot week</strong> — We coordinate with Matt Delory at Johnson City 1 to walk him through his first real submission</li>
+      <li><strong>Email branding</strong> — Add 3 DNS records to take5ventures.com so alerts come from alerts@take5ventures.com instead of a generic address (instructions on the email setup page)</li>
+      <li><strong>Roll out</strong> — After a successful pilot week, onboard remaining stores in batches</li>
+    </ol>
+  </div>
+
+  <!-- Questions for Client -->
+  <div class="question-box">
+    <h2>Questions for You</h2>
+    <p><strong>Variance threshold:</strong> Currently the app flags any variance over $15 and asks the manager to select a reason. What should happen next — should office be notified immediately? Should the submission be held for approval? Or is selecting a reason enough?</p>
+    <p style="margin-top: 10px;"><strong>Lead tech access:</strong> You mentioned lead techs sometimes close the shop. Should we create individual accounts for them, or would a shared store login work better?</p>
+  </div>
+
+  <!-- Links -->
+  <div class="section">
+    <h2>Other Resources</h2>
+    <p>
+      <a href="status.html" style="color: #2563eb; text-decoration: none; font-weight: 600;">Testing Status Report</a> — Screenshots and OCR test results<br>
+      <a href="checklist.html" style="color: #2563eb; text-decoration: none; font-weight: 600;">Go-Live Checklist</a> — Completed setup checklist<br>
+      <a href="email-setup.html" style="color: #2563eb; text-decoration: none; font-weight: 600;">Email Setup</a> — DNS instructions for branded email alerts<br>
+      <a href="backup.html" style="color: #2563eb; text-decoration: none; font-weight: 600;">Backup Setup</a> — Cloudflare R2 instructions (coming later)
+    </p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Questions? Email <a href="mailto:t.elliott.english@gmail.com">t.elliott.english@gmail.com</a>
+  <br>— Elliott English
+</div>
+
+</body>
+</html>
