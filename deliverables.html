@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Deliverables — Take 5 Close-Out App</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #f8fafc; color: #1e293b; line-height: 1.6;
+  }
+  .banner {
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+    color: #fff; padding: 40px 24px; text-align: center;
+  }
+  .banner h1 { font-size: 26px; font-weight: 700; }
+  .banner p { font-size: 15px; color: #bfdbfe; margin-top: 6px; }
+  .banner .date { font-size: 13px; color: #93c5fd; margin-top: 4px; }
+  .content { max-width: 720px; margin: 0 auto; padding: 32px 20px; }
+
+  .category {
+    margin-bottom: 32px;
+  }
+  .category-header {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  .category-header .icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .category-header h2 { font-size: 18px; font-weight: 700; color: #1e293b; }
+  .category-header .count {
+    margin-left: auto; font-size: 12px; font-weight: 600;
+    color: #64748b; background: #f1f5f9; padding: 3px 10px; border-radius: 10px;
+  }
+
+  .task-list { list-style: none; padding: 0; }
+  .task-list li {
+    padding: 10px 14px; font-size: 14px; color: #1e293b;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
+    margin-bottom: 6px; display: flex; align-items: flex-start; gap: 10px;
+  }
+  .task-list li .check { color: #16a34a; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .task-list li .detail { color: #64748b; font-size: 12px; margin-top: 2px; }
+
+  .summary-bar {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 20px; margin-bottom: 28px;
+    display: flex; justify-content: space-around; text-align: center;
+  }
+  .summary-stat .number { font-size: 28px; font-weight: 800; color: #2563eb; }
+  .summary-stat .label { font-size: 12px; color: #64748b; font-weight: 600; }
+
+  .footer {
+    text-align: center; padding: 24px; font-size: 13px; color: #94a3b8;
+    border-top: 1px solid #e2e8f0; margin-top: 20px;
+  }
+  .footer a { color: #2563eb; text-decoration: none; }
+
+  @media print {
+    .banner { padding: 20px; }
+    .task-list li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1>Take 5 Close-Out App</h1>
+  <p>Complete Project Deliverables</p>
+  <div class="date">As of March 26, 2026</div>
+</div>
+
+<div class="content">
+
+  <div class="summary-bar">
+    <div class="summary-stat">
+      <div class="number">68</div>
+      <div class="label">Tasks Completed</div>
+    </div>
+    <div class="summary-stat">
+      <div class="number">16</div>
+      <div class="label">Stores Set Up</div>
+    </div>
+    <div class="summary-stat">
+      <div class="number">34</div>
+      <div class="label">User Accounts</div>
+    </div>
+    <div class="summary-stat">
+      <div class="number">4</div>
+      <div class="label">Cloud Functions</div>
+    </div>
+  </div>
+
+  <!-- Mobile App -->
+  <div class="category">
+    <div class="category-header">
+      <div class="icon" style="background: #dbeafe;">📱</div>
+      <h2>Mobile App (iOS + Android)</h2>
+      <span class="count">18 items</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check">✓</span><div>Manager submission flow — 3-step wizard (select type/date, photos & numbers, review & submit)</div></li>
+      <li><span class="check">✓</span><div>AI-powered OCR receipt scanning via OpenRouter (Haiku + Sonnet fallback)<div class="detail">Tested on real thermal paper receipts — 100% accuracy</div></div></li>
+      <li><span class="check">✓</span><div>Auto-fill POS fields, batch totals, tips, and record counts from receipt photos</div></li>
+      <li><span class="check">✓</span><div>Submission queue showing last 7 days with green/orange status per date</div></li>
+      <li><span class="check">✓</span><div>Duplicate submission guard with clear redirect to resubmit flow</div></li>
+      <li><span class="check">✓</span><div>Soft-delete resubmit — old submissions preserved for audit trail, new one replaces it</div></li>
+      <li><span class="check">✓</span><div>Date validation — blocks future dates, warns on 30+ day old dates</div></li>
+      <li><span class="check">✓</span><div>OCR date mismatch detection — prompts when receipt date doesn't match selected date</div></li>
+      <li><span class="check">✓</span><div>Cash reconciliation — real-time variance calculation (POS total vs batches minus tips)</div></li>
+      <li><span class="check">✓</span><div>Variance flagging at $15 threshold with reason selection</div></li>
+      <li><span class="check">✓</span><div>Deposit slip submission with bank deposit tracking</div></li>
+      <li><span class="check">✓</span><div>Photo stamps showing date, type, and sequence number on thumbnails</div></li>
+      <li><span class="check">✓</span><div>Submission history with pull-to-refresh</div></li>
+      <li><span class="check">✓</span><div>Offline queue — submissions saved locally and auto-synced when connection returns</div></li>
+      <li><span class="check">✓</span><div>Keyboard handling — Done button on numeric inputs, KeyboardAvoidingView</div></li>
+      <li><span class="check">✓</span><div>Take 5 branded app icon</div></li>
+      <li><span class="check">✓</span><div>iOS build via EAS (TestFlight distribution)</div></li>
+      <li><span class="check">✓</span><div>Android build via EAS (APK distribution)</div></li>
+    </ul>
+  </div>
+
+  <!-- Web Dashboard -->
+  <div class="category">
+    <div class="category-header">
+      <div class="icon" style="background: #f0fdf4;">💻</div>
+      <h2>Web Dashboard (Office/Admin)</h2>
+      <span class="count">12 items</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check">✓</span><div>Daily compliance grid — all 16 stores with color-coded status badges</div></li>
+      <li><span class="check">✓</span><div>Date picker — view compliance for any past date</div></li>
+      <li><span class="check">✓</span><div>Market filter — CSRA, WNC, Tri-Cities TN</div></li>
+      <li><span class="check">✓</span><div>Compliance rate view — 7-day and 30-day submission percentages per store</div></li>
+      <li><span class="check">✓</span><div>Overdue deposits tracker — sorted by urgency, shows days outstanding and cash amount</div></li>
+      <li><span class="check">✓</span><div>Variance trends — stores ranked by flag count with top reasons and average variance</div></li>
+      <li><span class="check">✓</span><div>Flagged variances page — all submissions exceeding $15 threshold</div></li>
+      <li><span class="check">✓</span><div>Reports with per-store rollups and variance reason breakdown</div></li>
+      <li><span class="check">✓</span><div>CSV export with date range and type filters</div></li>
+      <li><span class="check">✓</span><div>Submission detail view with photo gallery and reconciliation data</div></li>
+      <li><span class="check">✓</span><div>Review actions — mark as Reviewed, Flagged, or Resolved</div></li>
+      <li><span class="check">✓</span><div>Hosted on Netlify with auto-deploy from GitHub</div></li>
+    </ul>
+  </div>
+
+  <!-- Database & Backend -->
+  <div class="category">
+    <div class="category-header">
+      <div class="icon" style="background: #fef3c7;">⚡</div>
+      <h2>Database & Backend</h2>
+      <span class="count">16 items</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check">✓</span><div>Supabase hosted database (PostgreSQL) on client's account</div></li>
+      <li><span class="check">✓</span><div>Database schema — stores, users, submissions, submission_photos tables</div></li>
+      <li><span class="check">✓</span><div>Row-Level Security (RLS) — managers see own store, office/admin see all</div></li>
+      <li><span class="check">✓</span><div>16 stores seeded with store numbers, names, markets, terminal counts, and bank names</div></li>
+      <li><span class="check">✓</span><div>34 user accounts created (1 admin, 5 office, 28 managers)</div></li>
+      <li><span class="check">✓</span><div>Partial unique index — prevents duplicate submissions while allowing resubmits</div></li>
+      <li><span class="check">✓</span><div>Daily compliance view (SQL view)</div></li>
+      <li><span class="check">✓</span><div>Missing submissions view (SQL view)</div></li>
+      <li><span class="check">✓</span><div>Deposit tracker view (SQL view)</div></li>
+      <li><span class="check">✓</span><div>Photo storage bucket with access policies</div></li>
+      <li><span class="check">✓</span><div>Edge Function: extract-receipt — multi-pass OCR pipeline (Haiku → validation → Sonnet fallback)</div></li>
+      <li><span class="check">✓</span><div>Edge Function: nightly-check — 10 PM compliance summary email</div></li>
+      <li><span class="check">✓</span><div>Edge Function: deposit-followup — 2 PM overdue deposit alert email</div></li>
+      <li><span class="check">✓</span><div>Edge Function: send-email — shared Resend email sender</div></li>
+      <li><span class="check">✓</span><div>Cron jobs scheduled via pg_cron for automated email triggers</div></li>
+      <li><span class="check">✓</span><div>Soft-delete audit trail — superseded submissions preserved with timestamp and user</div></li>
+    </ul>
+  </div>
+
+  <!-- Email & Notifications -->
+  <div class="category">
+    <div class="category-header">
+      <div class="icon" style="background: #fce7f3;">📧</div>
+      <h2>Email Notifications</h2>
+      <span class="count">5 items</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check">✓</span><div>Resend email integration configured</div></li>
+      <li><span class="check">✓</span><div>Nightly compliance summary — 10 PM ET daily (which stores submitted, which didn't)</div></li>
+      <li><span class="check">✓</span><div>Overdue deposit alert — 2 PM ET daily (deposits not made within 48 hours)</div></li>
+      <li><span class="check">✓</span><div>Multi-recipient support (comma-separated email list)</div></li>
+      <li><span class="check">✓</span><div>Domain verification in progress for branded sending (revfire.us)</div></li>
+    </ul>
+  </div>
+
+  <!-- DevOps & Infrastructure -->
+  <div class="category">
+    <div class="category-header">
+      <div class="icon" style="background: #e0e7ff;">🔧</div>
+      <h2>DevOps & Infrastructure</h2>
+      <span class="count">8 items</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check">✓</span><div>GitHub repository with full codebase (TomEnglish/Client_T5GS)</div></li>
+      <li><span class="check">✓</span><div>Web dashboard GitHub repo (TomEnglish/take5-dashboard)</div></li>
+      <li><span class="check">✓</span><div>Automated nightly database backup via GitHub Actions</div></li>
+      <li><span class="check">✓</span><div>PostgreSQL 17 pg_dump to Supabase pooler connection</div></li>
+      <li><span class="check">✓</span><div>Backup workflow with R2 upload (optional — activates when R2 is configured)</div></li>
+      <li><span class="check">✓</span><div>EAS Build configuration for iOS and Android</div></li>
+      <li><span class="check">✓</span><div>Apple Developer account set up for TestFlight distribution</div></li>
+      <li><span class="check">✓</span><div>SSH keys configured for GitHub deployments</div></li>
+    </ul>
+  </div>
+
+  <!-- Testing -->
+  <div class="category">
+    <div class="category-header">
+      <div class="icon" style="background: #f0fdf4;">🧪</div>
+      <h2>Testing & Validation</h2>
+      <span class="count">9 items</span>
+    </div>
+    <ul class="task-list">
+      <li><span class="check">✓</span><div>10 test scenarios with fixtures covering common variance causes</div></li>
+      <li><span class="check">✓</span><div>AI-generated test receipts for 3 days (POS reports, batch settlements, deposit slips)</div></li>
+      <li><span class="check">✓</span><div>Real receipt testing — Hendersonville store #1200, Feb 24-25</div></li>
+      <li><span class="check">✓</span><div>OCR accuracy verified at 100% on real thermal paper</div></li>
+      <li><span class="check">✓</span><div>Manager role end-to-end testing (submit, resubmit, history)</div></li>
+      <li><span class="check">✓</span><div>Admin role dashboard testing (compliance, deposits, trends, export)</div></li>
+      <li><span class="check">✓</span><div>Duplicate submission prevention verified</div></li>
+      <li><span class="check">✓</span><div>Soft-delete resubmit flow verified</div></li>
+      <li><span class="check">✓</span><div>Demo videos recorded for both roles</div></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  Built by <a href="mailto:t.elliott.english@gmail.com">Elliott English</a>
+  <br>March 2026
+</div>
+
+</body>
+</html>
