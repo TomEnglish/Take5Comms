@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testing Guide — Take 5 Close-Out App</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: #f8fafc; color: #1e293b; line-height: 1.6;
+  }
+  .banner {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #fff; padding: 40px 24px; text-align: center;
+  }
+  .banner h1 { font-size: 26px; font-weight: 700; }
+  .banner p { font-size: 15px; color: #d1fae5; margin-top: 6px; }
+  .banner .date { font-size: 13px; color: #a7f3d0; margin-top: 4px; }
+  .content { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+
+  .intro {
+    background: #f0fdf4; border-left: 4px solid #10b981;
+    padding: 16px 20px; border-radius: 0 10px 10px 0; margin-bottom: 28px;
+    font-size: 14px; color: #065f46;
+  }
+
+  .section { margin-bottom: 36px; }
+  .section h2 {
+    font-size: 20px; font-weight: 700; color: #1e293b;
+    margin-bottom: 14px; padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  h3 {
+    font-size: 16px; font-weight: 600; color: #334155;
+    margin: 20px 0 10px;
+  }
+
+  .card {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 12px;
+  }
+  .card-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 8px;
+  }
+  .label-green { color: #059669; }
+  .label-blue { color: #2563eb; }
+  .label-orange { color: #d97706; }
+
+  .access-row {
+    display: flex; gap: 16px; align-items: center;
+    padding: 10px 0; border-bottom: 1px solid #f1f5f9;
+  }
+  .access-row:last-child { border-bottom: none; }
+  .access-label { font-size: 13px; color: #64748b; min-width: 80px; }
+  .access-value { font-size: 14px; font-weight: 500; color: #1e293b; }
+  .access-value a { color: #2563eb; text-decoration: none; }
+  .access-value a:hover { text-decoration: underline; }
+
+  .step-list { list-style: none; padding: 0; counter-reset: steps; }
+  .step-list li {
+    counter-increment: steps;
+    padding: 12px 0 12px 44px; position: relative;
+    border-bottom: 1px solid #f1f5f9; font-size: 14px;
+  }
+  .step-list li:last-child { border-bottom: none; }
+  .step-list li::before {
+    content: counter(steps);
+    position: absolute; left: 0; top: 12px;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: #eff6ff; color: #2563eb;
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-note {
+    font-size: 12px; color: #64748b; margin-top: 4px; font-style: italic;
+  }
+
+  .accounts-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  .accounts-table th {
+    text-align: left; padding: 8px 12px; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    color: #64748b; background: #f8fafc; border-bottom: 2px solid #e2e8f0;
+  }
+  .accounts-table td {
+    padding: 10px 12px; border-bottom: 1px solid #f1f5f9;
+  }
+  .role-badge {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .role-admin { background: #f3e8ff; color: #7c3aed; }
+  .role-manager { background: #dbeafe; color: #2563eb; }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li {
+    padding: 10px 0 10px 32px; position: relative;
+    border-bottom: 1px solid #f1f5f9; font-size: 14px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "";
+    position: absolute; left: 2px; top: 12px;
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 2px solid #cbd5e1;
+  }
+
+  .alert-box {
+    background: #fef3c7; border: 1px solid #fcd34d; border-radius: 10px;
+    padding: 16px 20px; margin: 16px 0;
+  }
+  .alert-box p { font-size: 13px; color: #78350f; margin: 0; }
+
+  .feedback-box {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px;
+    padding: 20px; margin-top: 8px;
+  }
+  .feedback-box p { font-size: 14px; color: #1e40af; }
+
+  .footer {
+    text-align: center; padding: 24px; font-size: 13px; color: #94a3b8;
+    border-top: 1px solid #e2e8f0; margin-top: 20px;
+  }
+  .footer a { color: #2563eb; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1>Testing Guide</h1>
+  <p>Everything you need to access the app and run through testing</p>
+  <div class="date">Updated April 13, 2026</div>
+</div>
+
+<div class="content">
+
+  <div class="intro">
+    We're ready for real-world testing. This page has everything you need: how to access the app and dashboard, which accounts are set up, and a step-by-step checklist to run through. Pick one or two stores to start.
+  </div>
+
+  <!-- Access -->
+  <div class="section">
+    <h2>How to Access</h2>
+
+    <div class="card">
+      <div class="card-label label-blue">WEB DASHBOARD (Office / Admin)</div>
+      <div class="access-row">
+        <span class="access-label">URL</span>
+        <span class="access-value"><a href="https://t5dashboard.netlify.app" target="_blank">t5dashboard.netlify.app</a></span>
+      </div>
+      <div class="access-row">
+        <span class="access-label">What it does</span>
+        <span class="access-value">Review submissions, track compliance, manage deposits, add/remove users</span>
+      </div>
+      <div class="access-row">
+        <span class="access-label">Login</span>
+        <span class="access-value">Use your email + the password from your password reset email</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label label-green">MOBILE APP (Store Managers)</div>
+      <div class="access-row">
+        <span class="access-label">Install</span>
+        <span class="access-value">Open the TestFlight link on your iPhone (link sent separately)</span>
+      </div>
+      <div class="access-row">
+        <span class="access-label">What it does</span>
+        <span class="access-value">Submit nightly close-outs and deposit slips with receipt photos</span>
+      </div>
+      <div class="access-row">
+        <span class="access-label">Login</span>
+        <span class="access-value">Use your email + the password from your welcome email</span>
+      </div>
+    </div>
+
+    <div class="alert-box">
+      <p><strong>Password reset emails</strong> have been sent to all accounts below. Check your inbox (and spam/junk folder) for an email from Supabase. If you didn't receive one, contact Elliott and we'll resend it.</p>
+    </div>
+  </div>
+
+  <!-- Accounts -->
+  <div class="section">
+    <h2>Accounts</h2>
+
+    <div class="card" style="padding: 0; overflow: hidden;">
+      <table class="accounts-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Store</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Matt Delory</td>
+            <td>mattdelory@take5ventures.com</td>
+            <td><span class="role-badge role-admin">Admin</span></td>
+            <td>All stores (dashboard)</td>
+          </tr>
+          <tr>
+            <td>David Berry</td>
+            <td>david@take5ventures.com</td>
+            <td><span class="role-badge role-admin">Admin</span></td>
+            <td>All stores (dashboard)</td>
+          </tr>
+          <tr>
+            <td>Phillip Hornsby</td>
+            <td>phillip@take5ventures.com</td>
+            <td><span class="role-badge role-manager">Manager</span></td>
+            <td>#1198 Augusta 1</td>
+          </tr>
+          <tr>
+            <td>Devan Brown</td>
+            <td>devan@take5ventures.com</td>
+            <td><span class="role-badge role-manager">Manager</span></td>
+            <td>#1201 Augusta 2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 13px; color: #64748b; margin-top: 10px;">
+      Need to add more testers? Admin users can create new accounts from the dashboard: <strong>Store Management</strong> &rarr; <strong>Add User</strong>.
+    </p>
+  </div>
+
+  <!-- Testing Steps: Manager -->
+  <div class="section">
+    <h2>Testing Checklist: Store Manager</h2>
+    <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">Have a manager at a test store run through these steps on their phone.</p>
+
+    <div class="card">
+      <div class="card-label label-green">NIGHTLY CLOSE-OUT</div>
+      <ol class="step-list">
+        <li>
+          Open the app and sign in with your email and password
+        </li>
+        <li>
+          Select yesterday's date (or today if the store is already closed) and tap <strong>Nightly Close</strong>
+        </li>
+        <li>
+          Take a photo of the POS close-out report
+          <div class="step-note">The app will try to read the numbers automatically (OCR). You can correct anything it gets wrong.</div>
+        </li>
+        <li>
+          Take photos of each batch receipt (one per terminal)
+          <div class="step-note">Enter batch totals, tips, and record counts if they weren't picked up by OCR.</div>
+        </li>
+        <li>
+          Enter the cash counted at close
+          <div class="step-note">The app will show whether the cash matches the expected amount.</div>
+        </li>
+        <li>
+          If the variance exceeds $15, select a reason: <strong>Refund</strong> or <strong>Other</strong>
+          <div class="step-note">Refund requires no further explanation. Other asks for a brief note (at least 10 characters).</div>
+        </li>
+        <li>
+          Review the summary and tap <strong>Submit</strong>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="card-label label-green">DEPOSIT SLIP (next day)</div>
+      <ol class="step-list">
+        <li>Open the app and select the same date as the nightly close-out</li>
+        <li>Tap <strong>Deposit Slip</strong></li>
+        <li>Take a photo of the bank deposit receipt</li>
+        <li>Enter the deposit amount and the date the deposit was made</li>
+        <li>Submit</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Testing Steps: Office -->
+  <div class="section">
+    <h2>Testing Checklist: Office / Admin</h2>
+    <p style="font-size: 14px; color: #64748b; margin-bottom: 16px;">After a manager submits, check these on the web dashboard.</p>
+
+    <div class="card">
+      <div class="card-label label-blue">DASHBOARD REVIEW</div>
+      <ol class="step-list">
+        <li>
+          Log in at <a href="https://t5dashboard.netlify.app" target="_blank" style="color: #2563eb;">t5dashboard.netlify.app</a>
+        </li>
+        <li>
+          Check the <strong>Dashboard</strong> — the test store should show green (submitted)
+        </li>
+        <li>
+          Click into the submission to see receipt photos, extracted numbers, and reconciliation math
+        </li>
+        <li>
+          Check the <strong>Flagged Variances</strong> page if the submission had a variance over $15
+        </li>
+        <li>
+          Check the <strong>Deposit Tracker</strong> to see outstanding deposits
+        </li>
+        <li>
+          Go to <strong>Store Management</strong> — try adding a test user, assigning them to a store, then removing them
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Automated Emails -->
+  <div class="section">
+    <h2>Automated Emails to Watch For</h2>
+
+    <div class="card">
+      <div class="card-label label-orange">COMPLIANCE & ALERTS</div>
+      <ul class="checklist">
+        <li>
+          <strong>10:00 AM ET</strong> — Compliance summary email listing which stores submitted the previous day and which are missing
+        </li>
+        <li>
+          <strong>2:00 PM ET</strong> — Deposit follow-up email if any stores haven't deposited cash within 72 hours of their close-out
+        </li>
+      </ul>
+      <div class="step-note" style="margin-top: 8px;">These emails go to the configured office email address. Let us know the email address where you'd like to receive these alerts.</div>
+    </div>
+  </div>
+
+  <!-- What to Look For -->
+  <div class="section">
+    <h2>What to Look For</h2>
+
+    <div class="feedback-box">
+      <p>As you test, keep an eye on these questions:</p>
+      <ul style="margin-top: 12px; padding-left: 20px;">
+        <li style="margin-bottom: 8px;">Does the form flow make sense for your managers? Is anything confusing?</li>
+        <li style="margin-bottom: 8px;">Are the OCR results accurate on your receipt formats?</li>
+        <li style="margin-bottom: 8px;">Is anything missing that should be there?</li>
+        <li style="margin-bottom: 8px;">Are there fields that should be required but aren't (or vice versa)?</li>
+        <li style="margin-bottom: 8px;">Does the dashboard give you the information you need at a glance?</li>
+      </ul>
+      <p style="margin-top: 16px;">Don't worry about breaking anything — that's what testing is for. Just note what works, what doesn't, and what you'd change.</p>
+    </div>
+  </div>
+
+  <!-- What Changed -->
+  <div class="section">
+    <h2>Recent Updates (April 13)</h2>
+
+    <div class="card">
+      <div class="rule-desc" style="font-size: 14px;">
+        <strong>Variance reasons</strong> — Simplified to Refund / Other. Refund is one tap, no notes needed. Other requires a brief explanation.<br><br>
+        <strong>Overdue deposit alerts</strong> — Extended from 48 to 72 hours so Friday deposits that hit the bank Monday don't trigger false alarms.<br><br>
+        <strong>Compliance email</strong> — Now sends at 10 AM the next morning instead of 10 PM, giving managers time to upload after close.<br><br>
+        <strong>User management</strong> — Admin users can add, remove, and reassign managers directly from the dashboard. Go to Store Management &rarr; Add User.<br><br>
+        <strong>Personnel updates</strong> — Phillip Hornsby assigned as manager at 1198 (Augusta 1), Devan Brown at 1201 (Augusta 2), Deandre Smith removed.
+      </div>
+    </div>
+  </div>
+
+  <!-- Need From You -->
+  <div class="section">
+    <h2>Still Need From You</h2>
+
+    <div class="card">
+      <ul class="checklist">
+        <li>Confirm Phillip and Devan received their password reset emails</li>
+        <li>Email address for compliance/deposit alert notifications</li>
+        <li>Which store(s) you'd like to test with first</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Questions? Email <a href="mailto:t.elliott.english@gmail.com">t.elliott.english@gmail.com</a>
+  <br>— Elliott English
+</div>
+
+</body>
+</html>

@@ -100,12 +100,9 @@
     <div class="rule-card">
       <div class="rule-header">
         <span class="rule-name">Variance Reason Categories</span>
-        <span class="rule-value">TBD — your input needed</span>
+        <span class="rule-value">Refund / Other</span>
       </div>
-      <div class="rule-desc">Currently, flagged variances require a free-text note. We can add a dropdown with standard reason categories if that's useful for reporting.</div>
-      <div class="question-box">
-        <p><strong>Question:</strong> What are the most common reasons for a cash variance at your stores? We'd like to build a dropdown with your real-world categories so office staff can easily filter and track patterns.</p>
-      </div>
+      <div class="rule-desc">When variance exceeds $15, the manager selects a reason: <strong>Refund</strong> (most common — no further explanation needed) or <strong>Other</strong> (requires a written explanation of at least 10 characters).</div>
     </div>
   </div>
 
@@ -116,9 +113,9 @@
     <div class="rule-card">
       <div class="rule-header">
         <span class="rule-name">Overdue Deposit Alert</span>
-        <span class="rule-value">48 hours</span>
+        <span class="rule-value">72 hours</span>
       </div>
-      <div class="rule-desc">If a nightly close-out has cash to deposit and no deposit slip has been submitted within 48 hours, the store appears in the overdue deposit alert email.</div>
+      <div class="rule-desc">If a nightly close-out has cash to deposit and no deposit slip has been submitted within 72 hours, the store appears in the overdue deposit alert email. The 72-hour window accounts for Friday deposits that don't reach the bank until Monday.</div>
     </div>
 
     <div class="rule-card">
@@ -182,9 +179,9 @@
     <div class="rule-card">
       <div class="rule-header">
         <span class="rule-name">Nightly Compliance Summary</span>
-        <span class="rule-value">10:00 PM ET daily</span>
+        <span class="rule-value">10:00 AM ET daily</span>
       </div>
-      <div class="rule-desc">Lists which stores submitted their nightly close-out and which didn't. Includes flagged variances.</div>
+      <div class="rule-desc">Sent the next morning — lists which stores submitted the previous day's nightly close-out and which didn't. Includes flagged variances. The 10 AM timing gives managers and assistants time to upload after close.</div>
     </div>
 
     <div class="rule-card">
@@ -192,7 +189,7 @@
         <span class="rule-name">Overdue Deposit Alert</span>
         <span class="rule-value">2:00 PM ET daily</span>
       </div>
-      <div class="rule-desc">Lists stores where cash hasn't been deposited within 48 hours of the close-out.</div>
+      <div class="rule-desc">Lists stores where cash hasn't been deposited within 72 hours of the close-out.</div>
     </div>
   </div>
 
@@ -244,15 +241,18 @@
     </div>
   </div>
 
-  <!-- Open Questions -->
+  <!-- Recent Changes (April 2026) -->
   <div class="section">
-    <h2>Open Questions</h2>
+    <h2>Recent Changes (April 13, 2026)</h2>
 
-    <div class="question-box" style="margin-top: 0;">
-      <p><strong>Variance reason categories:</strong> When a variance exceeds $15, managers currently write a free-text note. What are the most common reasons for cash variances at your stores? We can build a dropdown with standard categories for easier tracking and reporting.</p>
-      <p style="margin-top: 10px;"><strong>Variance actions:</strong> Should the office be notified immediately when a variance is flagged? Should the submission require approval? Or is the required note sufficient?</p>
-      <p style="margin-top: 10px;"><strong>Lead tech access:</strong> Should lead techs who close the shop have their own accounts, or should there be a shared store login?</p>
-      <p style="margin-top: 10px;"><strong>Any thresholds to adjust?</strong> The $15 variance flag, 48-hour deposit window, 7-day queue display, and 30-day old-date warning can all be changed. Let me know what works for your operations.</p>
+    <div class="rule-card">
+      <div class="rule-desc">
+        <strong>Variance reasons</strong> — Simplified to Refund / Other per client feedback. Refund needs no notes; Other requires at least 10 characters of explanation.<br><br>
+        <strong>Deposit threshold</strong> — Extended from 48 to 72 hours to avoid false weekend alerts.<br><br>
+        <strong>Compliance email timing</strong> — Moved from 10 PM same day to 10 AM next morning.<br><br>
+        <strong>User management</strong> — Office and admin users can now add, remove, and reassign managers directly from the web dashboard (Store Management page). No developer involvement needed.<br><br>
+        <strong>Personnel</strong> — Phillip Hornsby assigned to 1198, Devan Brown to 1201, Deandre Smith removed.
+      </div>
     </div>
   </div>
 
