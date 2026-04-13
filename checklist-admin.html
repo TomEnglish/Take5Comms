@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Testing Checklist — Take 5 Close-Out App</title>
+<style>
+  @page { size: letter; margin: 0.6in 0.75in; }
+  @media print {
+    body { background: #fff; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color: #1e293b; background: #f8fafc; line-height: 1.5;
+    max-width: 750px; margin: 0 auto; padding: 32px 24px;
+  }
+
+  .print-bar {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;
+    padding: 12px 16px; margin-bottom: 24px; text-align: center;
+    font-size: 14px; color: #1e40af;
+  }
+  .print-bar button {
+    background: #2563eb; color: #fff; border: none; border-radius: 6px;
+    padding: 8px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+    margin-left: 12px;
+  }
+  .print-bar button:hover { background: #1d4ed8; }
+
+  .header {
+    border-bottom: 3px solid #2563eb; padding-bottom: 16px; margin-bottom: 24px;
+  }
+  .header h1 { font-size: 24px; font-weight: 700; }
+  .header .subtitle { font-size: 14px; color: #64748b; margin-top: 4px; }
+
+  .info-row {
+    display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .info-field { flex: 1; min-width: 200px; }
+  .info-label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
+  .info-input {
+    border: none; border-bottom: 1.5px solid #cbd5e1;
+    font-size: 15px; padding: 6px 0; width: 100%; color: #1e293b;
+    background: transparent;
+  }
+
+  h2 {
+    font-size: 18px; font-weight: 700; color: #1e293b;
+    margin: 28px 0 12px; padding-bottom: 6px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+  h3 {
+    font-size: 15px; font-weight: 600; color: #2563eb;
+    margin: 20px 0 10px;
+  }
+
+  .check-item {
+    display: flex; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    align-items: flex-start;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .checkbox {
+    width: 20px; height: 20px; border: 2px solid #94a3b8;
+    border-radius: 4px; flex-shrink: 0; margin-top: 1px;
+  }
+  .check-text { font-size: 14px; flex: 1; }
+  .check-hint { font-size: 12px; color: #64748b; margin-top: 3px; font-style: italic; }
+
+  .rating-row {
+    display: flex; gap: 8px; padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9; align-items: center;
+  }
+  .rating-label { font-size: 13px; color: #334155; flex: 1; }
+  .rating-options { display: flex; gap: 6px; }
+  .rating-option {
+    width: 28px; height: 28px; border: 1.5px solid #cbd5e1;
+    border-radius: 50%; text-align: center; line-height: 25px;
+    font-size: 12px; color: #64748b; cursor: pointer;
+  }
+
+  .result-row {
+    display: flex; gap: 12px; padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9; align-items: center;
+  }
+  .result-label { font-size: 13px; color: #64748b; min-width: 200px; }
+  .result-line { flex: 1; border-bottom: 1.5px solid #cbd5e1; min-height: 20px; }
+
+  .feedback-section {
+    margin-top: 24px; padding-top: 16px; border-top: 2px solid #e2e8f0;
+  }
+  .feedback-label { font-size: 13px; font-weight: 600; color: #64748b; margin-bottom: 4px; }
+  .feedback-box {
+    border: 1.5px solid #cbd5e1; border-radius: 8px;
+    min-height: 80px; padding: 12px; margin-top: 8px;
+  }
+
+  .return-info {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;
+    padding: 16px; margin-top: 24px; font-size: 13px; color: #1e40af;
+  }
+
+  .footer { font-size: 12px; color: #94a3b8; margin-top: 24px; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="print-bar no-print">
+  Print this page or fill it out on screen and return to Elliott and David.
+  <button onclick="window.print()">Print</button>
+</div>
+
+<div class="header">
+  <h1>Admin / Office Testing Checklist</h1>
+  <div class="subtitle">Take 5 Daily Close-Out App — Dashboard Testing</div>
+</div>
+
+<div class="info-row">
+  <div class="info-field">
+    <div class="info-label">Your Name</div>
+    <input class="info-input" type="text" placeholder="">
+  </div>
+  <div class="info-field">
+    <div class="info-label">Date Tested</div>
+    <input class="info-input" type="text" placeholder="">
+  </div>
+</div>
+
+<!-- Part 1: Login & Dashboard -->
+<h2>Part 1: Login & Dashboard</h2>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Received password reset email and set my password
+    <div class="check-hint">Check inbox and spam for email from Supabase</div>
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Logged in at t5dashboard.netlify.app
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Dashboard loads — I can see the store compliance grid
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Market filter buttons work (CSRA, WNC, Tri-Cities TN, All)
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Date picker works — I can view a different day's submissions
+  </div>
+</div>
+
+<!-- Part 2: Reviewing Submissions -->
+<h2>Part 2: Reviewing a Submission</h2>
+<h3>After a manager submits a test close-out, review it here</h3>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Test store shows as submitted (green) on the dashboard
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Clicked into the submission — can see receipt photos
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Reconciliation numbers look correct (POS total, batches, tips, variance)
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Can mark submission as "Reviewed", "Flagged", or "Resolved"
+  </div>
+</div>
+
+<!-- Part 3: Flagged Variances -->
+<h2>Part 3: Flagged Variances</h2>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Flagged Variances page loads and shows flagged submissions
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Variance reason shows correctly (Refund or Other with note)
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Can click "Review" to see full submission detail
+  </div>
+</div>
+
+<!-- Part 4: Deposit Tracker -->
+<h2>Part 4: Deposit Tracker</h2>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Deposit Tracker page loads
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Stores with outstanding deposits appear with days overdue
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    After a deposit slip is submitted, the store clears from the tracker
+  </div>
+</div>
+
+<!-- Part 5: User Management -->
+<h2>Part 5: User Management</h2>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Store Management page loads from sidebar
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Can see all users and their assigned stores
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    "Add User" button works — created a test user
+    <div class="check-hint">Use a test email you control. Delete the test user when done.</div>
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    "Manage" button works — reassigned a user to a different store, then moved them back
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    "Delete" button works — removed the test user created above
+  </div>
+</div>
+
+<!-- Part 6: Reports -->
+<h2>Part 6: Reports & Export</h2>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Reports page loads with date range and market filters
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    CSV export downloads a file
+  </div>
+</div>
+
+<!-- Part 7: Automated Emails -->
+<h2>Part 7: Automated Emails</h2>
+
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Received the 10 AM compliance summary email
+    <div class="check-hint">Shows which stores submitted the previous day and which are missing</div>
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Email content is accurate — submitted stores match the dashboard
+  </div>
+</div>
+<div class="check-item">
+  <div class="checkbox"></div>
+  <div class="check-text">
+    Received the 2 PM deposit follow-up email (if applicable)
+    <div class="check-hint">Only fires if a deposit is overdue by 72+ hours</div>
+  </div>
+</div>
+
+<!-- Ratings -->
+<h2>Part 8: Rate Each Area</h2>
+<p style="font-size: 13px; color: #64748b; margin-bottom: 12px;">Circle a rating: 1 = needs work, 5 = great</p>
+
+<div class="rating-row">
+  <span class="rating-label">Dashboard — easy to understand at a glance?</span>
+  <div class="rating-options">
+    <div class="rating-option">1</div>
+    <div class="rating-option">2</div>
+    <div class="rating-option">3</div>
+    <div class="rating-option">4</div>
+    <div class="rating-option">5</div>
+  </div>
+</div>
+<div class="rating-row">
+  <span class="rating-label">Submission review — has the info you need?</span>
+  <div class="rating-options">
+    <div class="rating-option">1</div>
+    <div class="rating-option">2</div>
+    <div class="rating-option">3</div>
+    <div class="rating-option">4</div>
+    <div class="rating-option">5</div>
+  </div>
+</div>
+<div class="rating-row">
+  <span class="rating-label">Deposit tracking — clear and useful?</span>
+  <div class="rating-options">
+    <div class="rating-option">1</div>
+    <div class="rating-option">2</div>
+    <div class="rating-option">3</div>
+    <div class="rating-option">4</div>
+    <div class="rating-option">5</div>
+  </div>
+</div>
+<div class="rating-row">
+  <span class="rating-label">User management — easy to add/remove people?</span>
+  <div class="rating-options">
+    <div class="rating-option">1</div>
+    <div class="rating-option">2</div>
+    <div class="rating-option">3</div>
+    <div class="rating-option">4</div>
+    <div class="rating-option">5</div>
+  </div>
+</div>
+<div class="rating-row">
+  <span class="rating-label">Email alerts — timely and accurate?</span>
+  <div class="rating-options">
+    <div class="rating-option">1</div>
+    <div class="rating-option">2</div>
+    <div class="rating-option">3</div>
+    <div class="rating-option">4</div>
+    <div class="rating-option">5</div>
+  </div>
+</div>
+
+<!-- Feedback -->
+<div class="feedback-section">
+  <div class="feedback-label">What information is missing from the dashboard that you'd want to see?</div>
+  <div class="feedback-box" contenteditable="true"></div>
+</div>
+
+<div class="feedback-section">
+  <div class="feedback-label">Was anything confusing or hard to find?</div>
+  <div class="feedback-box" contenteditable="true"></div>
+</div>
+
+<div class="feedback-section">
+  <div class="feedback-label">Any other comments or suggestions?</div>
+  <div class="feedback-box" contenteditable="true"></div>
+</div>
+
+<div class="return-info">
+  <strong>When you're done:</strong> Return this form (printed, photographed, or filled out on screen) to Elliott and David. If you couldn't complete a step, note what happened and move on.
+</div>
+
+<div class="footer">Take 5 Close-Out App — Admin/Office Testing Checklist — April 2026</div>
+
+</body>
+</html>
